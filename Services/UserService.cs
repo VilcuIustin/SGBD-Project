@@ -47,11 +47,9 @@ namespace SGBD_Project.Services
             return new Response<bool>(true);
         }
 
-
         public async Task<Response<UserDto>> LoginAsync(LoginDto dto)
         {
             User existingUser;
-
 
             using (var conn = new SqlConnection((string)_configuration.GetValue(typeof(string), "ConnectionStrings")))
             {

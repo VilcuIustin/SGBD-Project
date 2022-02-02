@@ -31,6 +31,40 @@ namespace SGBD_Project.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetQueries(FilterQueries filter)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        [HttpPost("repair/{repairType:int}")]
+        public async Task<ActionResult> RepairAll(WorkspaceIdDto dto, int repairType)
+        {
+            try
+            {
+                return Ok(await _queries.RepairAll(dto, new Guid(User.Claims.FirstOrDefault(c => c.Type == "id").Value), repairType));
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return new ObjectResult("Something went wrong! Please try again later");
+            }
+        }
+
+        [HttpPost("table")]
+        public async Task<ActionResult> CreateTable(TableCreateDto dto)
+        {
+            try
+            {
+                return Ok(await _queries.CreateTable(dto, new Guid(User.Claims.FirstOrDefault(c => c.Type == "id").Value)));
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return new ObjectResult("Something went wrong! Please try again later");
+            }
+        }
 
     }
 }
