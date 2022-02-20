@@ -2,7 +2,6 @@
 {
     public static class RepairQueries
     {
-
 		public static string DropProcs =>
 			@"DROP PROC IF EXISTS NORMALIZARE_PK, Create_Column, TABLES_WITHOUT_PK, CREATE_TMP_TABLE_RESULTS, CREATE_SEQUENCE_NUMERIC, TABLES_WITH_PK_FK, TABLES_WITH_PK;
 ";
@@ -116,7 +115,7 @@ AS
 
 	 FROM SYS.foreign_keys fk JOIN SYS.foreign_key_columns fkc ON fk.object_id = fkc.constraint_object_id
 	 JOIN SYS.columns c ON C.object_id = FKC.referenced_object_id and c.column_id = fkc.referenced_column_id
-	 JOIN SYS.columns cc ON CC.object_id = FKC.parent_object_id and cc.column_id = fkc.constraint_column_id
+	 JOIN SYS.columns cc ON CC.object_id = FKC.parent_object_id and cc.column_id = fkc.parent_column_id
 	 JOIN SYS.types ty ON TY.user_type_id = C.system_type_id
 	 order by fkc.referenced_object_id ;
 	 --select * from #FkDetails;
